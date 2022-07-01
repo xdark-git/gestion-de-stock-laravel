@@ -15,4 +15,14 @@ class Produit extends Model
      * @var string
      */
     protected $table = 'produits';
+
+    public function entrees()
+    {
+        return $this->hasMany(Entree::class);
+    }
+
+    public function sorite()
+    {
+        return $this->hasMany(Sortie::class);
+    }
 }
