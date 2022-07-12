@@ -20,6 +20,9 @@ Route::get('/', function () {
     return view('login');
 })->name('login');
 
+Route::get('/logout', [LoginController::class, 'logout'])
+    ->name('logout');
+
 Route::get('/acceuil', function () {
     return view('layouts/app');
 })  ->name('acceuil')

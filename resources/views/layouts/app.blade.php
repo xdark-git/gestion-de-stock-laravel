@@ -122,7 +122,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">username</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="{{ asset('accueil/img/undraw_profile.svg')}}">
                             </a>
@@ -189,7 +189,7 @@
                 <div class="modal-body">Cliquer sur "se déconnecter" si vous voulez arreter la session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="/logout">Se déconnecter</a>
+                    <a class="btn btn-primary" href="{{route('logout')}}">Se déconnecter</a>
                 </div>
             </div>
         </div>
