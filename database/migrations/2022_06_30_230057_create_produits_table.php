@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedInteger('categorie_id');
             $table->foreign('categorie_id')->references('id')->on('categories');
-           
+            $table->timestamps();
             
         });
     }

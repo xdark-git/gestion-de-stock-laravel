@@ -43,6 +43,13 @@ Route::post('/ajouterProduit', [ProduitController::class, 'ajouter'])
     ->name('ajouterProduit')
     ->middleware('auth');
 
+Route::get('/entrees', [ProduitController::class, 'liste'])  
+    ->name('entrees')
+    ->middleware('auth');
+Route::post('/ajouterEntree', [ProduitController::class, 'ajouter'])  
+    ->name('ajouterEntree')
+    ->middleware('auth');
+
 
 
 

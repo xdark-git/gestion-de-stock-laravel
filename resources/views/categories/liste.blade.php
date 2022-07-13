@@ -12,11 +12,18 @@
                         <tr>
                             <th>Identifiant</th>
                             <th>nom</th>
+                            <!-- <th></th> -->
                         </tr>
                         @foreach($categories as $categorie)
                         <tr>
                             <td> {{$categorie->id}} </td>
                             <td> {{$categorie->nom}} </td>
+                            <!-- <td>
+                                <form action="" method="get">
+                                <input type="hidden" name="categorieId" value="">
+                                 <input type="submit" value="Ajouter" class="btn btn-success form-group">
+                                </form> 
+                            </td> -->
                         </tr>
                         @endforeach
                     </table>

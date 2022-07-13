@@ -10,18 +10,16 @@
                 <div class="card-body">
                     <table class="table table-striped">
                         <tr>
-                            <th>Identifiant</th>
                             <th>libelle</th>
                             <th>Quantite en stock</th>
                         </tr>
+                        @foreach($produits as $produit)
+                            <tr>
+                                <td>{{$produit->libelle}}</td>
+                                <td>{{$produit->stock}}</td>
+                            </tr>
+                        @endforeach
                         
-                        <!-- {% for p in produits%} -->
-                        <tr>
-                            <td> p.id </td>
-                            <td>p.libelle </td>
-                            <td>p.qtStock </td>
-                        </tr>
-                        <!-- {% endfor %} -->
                     </table>
                 </div>
             </div>
@@ -32,8 +30,19 @@
                 <div class="card-body">
                 <form action="{{route('ajouterProduit')}}" method="post" >
                     @csrf
+                    @if($errors->any())
+						<div class="alert alert-danger">
+    					{{ implode('', $errors->all(':message')) }}
+						</div>
+					@endif
                     <input type="text" name="libelle" placeholder="Libelle" class="form-control form-group">
                     <input type="text" name="stock" placeholder="Quantité stock" class="form-control form-group">
+                    <select class="form-control form-group" aria-label=".form-select-lg example"  name ="categorie_id">
+                        <option selected>Selectionner la catégorie du produit</option>
+                        @foreach($categories as $categorie)
+                            <option value="{{$categorie->id}}">{{$categorie->nom}}</option>
+                        @endforeach
+                    </select>
                     <input type="submit" value="Ajouter" class="btn btn-success form-group">
                 </form>
                 </div>
