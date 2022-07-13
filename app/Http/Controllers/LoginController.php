@@ -48,4 +48,14 @@ class LoginController extends Controller
     
         return redirect('/');
     }
+
+    public function returnView ()
+    {
+        if (Auth::check()) 
+        {
+            return redirect()->intended('acceuil');
+        }
+        
+        return view('login');
+    }
 }

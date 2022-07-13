@@ -61,7 +61,8 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gestion des pages</h6>
-                        <a class="collapse-item" href="#">Gestion des produits</a>
+                        <a class="collapse-item" href="{{route('categories')}}">Gestion des categories</a>
+                        <a class="collapse-item" href="{{route('produit')}}">Gestion des produits</a>
                         <a class="collapse-item" href="#">Gestion des entrées</a>
                         <a class="collapse-item" href="#">Gestiond des sorties</a>
                     </div>

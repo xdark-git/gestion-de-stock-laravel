@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AccueilController;
+use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\CategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,16 +19,30 @@ use App\Http\Controllers\LoginController;
 Route::post('/authenticate', [LoginController::class, 'authenticate'])
     ->name('authenticate');
 
-Route::get('/', function () {
-    return view('login');
-})->name('login');
+Route::get('/', [LoginController::class, 'returnView'] )
+    ->name('login');
 
 Route::get('/logout', [LoginController::class, 'logout'])
     ->name('logout');
 
-Route::get('/acceuil', function () {
-    return view('layouts/app');
-})  ->name('acceuil')
+Route::get('/acceuil', [AccueilController::class, 'index'])  
+    ->name('acceuil')
     ->middleware('auth');
+
+Route::get('/categories', [CategoriesController::class, 'liste'])  
+    ->name('categories')
+    ->middleware('auth');
+Route::post('/ajouterCategories', [CategoriesController::class, 'ajouter'])  
+    ->name('ajouterCategories')
+    ->middleware('auth');
+
+Route::get('/produit', [ProduitController::class, 'liste'])  
+    ->name('produit')
+    ->middleware('auth');
+Route::post('/ajouterProduit', [ProduitController::class, 'ajouter'])  
+    ->name('ajouterProduit')
+    ->middleware('auth');
+
+
 
 
