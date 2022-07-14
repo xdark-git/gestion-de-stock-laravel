@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\EntreesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,11 @@ Route::get('/categories', [CategoriesController::class, 'liste'])
 Route::post('/ajouterCategories', [CategoriesController::class, 'ajouter'])  
     ->name('ajouterCategories')
     ->middleware('auth');
+Route::get('/modifierCategorie/{id}', [CategoriesController::class, 'updatePage'])  
+    ->middleware('auth');
+Route::post('/modifierCategorie/{id}', [CategoriesController::class, 'updateCategorie'])  
+    ->name('modifierCategorie')
+    ->middleware('auth');
 
 Route::get('/produit', [ProduitController::class, 'liste'])  
     ->name('produit')
@@ -43,10 +49,10 @@ Route::post('/ajouterProduit', [ProduitController::class, 'ajouter'])
     ->name('ajouterProduit')
     ->middleware('auth');
 
-Route::get('/entrees', [ProduitController::class, 'liste'])  
+Route::get('/entrees', [EntreesController::class, 'liste'])  
     ->name('entrees')
     ->middleware('auth');
-Route::post('/ajouterEntree', [ProduitController::class, 'ajouter'])  
+Route::post('/ajouterEntree', [EntreesController::class, 'ajouter'])  
     ->name('ajouterEntree')
     ->middleware('auth');
 

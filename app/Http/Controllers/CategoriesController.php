@@ -29,11 +29,39 @@ class CategoriesController extends Controller
      */
     public function ajouter(Request $request)
     {
-        $categorie = new Categorie;
+        $validated = $request->validate([
+            'nom' => 'required'
+        ]);
+        if($validated)
+        {
+            $categorie = new Categorie;
 
-        $categorie->nom = $request->nom;
+            $categorie->nom = $request->nom;
 
-        $categorie->save();
+            $categorie->save();
+
+            return redirect('/categories');
+        }
+        
+    }
+    
+    public function updatePage(Request $request)
+    {
+        $categorie = DB::table('categories')->where('id',$request->route('id'))->get();
+       
+        return view('categories.update')
+                ->with('categorie', $categorie);
+    }
+
+    public function updateCategorie(Request $request)
+    {
+        $validated = $request->validate([
+            'nom' => 'required'
+        ]);
+        $updateCategorie = Categorie::find($request->route('id'));
+        $updateCategorie->nom = $request->nom;
+        $updateCategorie->save();
+
 
         return redirect('/categories');
     }
