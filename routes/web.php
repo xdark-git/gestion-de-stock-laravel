@@ -47,6 +47,12 @@ Route::get('/deleteCategorie/{id}', [CategoriesController::class, 'deleteCategor
 Route::get('/produit', [ProduitController::class, 'liste'])  
     ->name('produit')
     ->middleware('auth');
+Route::get('/modifierProduit/{id}', [ProduitController::class, 'updatePage']) 
+    ->middleware('auth');
+Route::get('/supprimerProduit/{id}', [ProduitController::class, 'deleteProduit']) 
+    ->middleware('auth');
+Route::post('/modifierProduit/{id}', [ProduitController::class, 'updateProduit']) 
+    ->middleware('auth');
 Route::post('/ajouterProduit', [ProduitController::class, 'ajouter'])  
     ->name('ajouterProduit')
     ->middleware('auth');

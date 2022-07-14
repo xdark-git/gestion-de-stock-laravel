@@ -12,11 +12,19 @@
                         <tr>
                             <th>libelle</th>
                             <th>Quantite en stock</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                         @foreach($produits as $produit)
                             <tr>
                                 <td>{{$produit->libelle}}</td>
                                 <td>{{$produit->stock}}</td>
+                                <td> 
+                                    <a href="/modifierProduit/{{$produit->id}}">Modifier</a>
+                                </td>
+                                <td> 
+                                    <a style="color: red" href="/supprimerProduit/{{$produit->id}}">Supprimer</a>
+                                </td>
                             </tr>
                         @endforeach
                         
@@ -32,7 +40,11 @@
                     @csrf
                     @if($errors->any())
 						<div class="alert alert-danger">
-    					{{ implode('', $errors->all(':message')) }}
+                        <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
 						</div>
 					@endif
                     <input type="text" name="libelle" placeholder="Libelle" class="form-control form-group">
