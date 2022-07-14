@@ -58,10 +58,26 @@ class CategoriesController extends Controller
         $validated = $request->validate([
             'nom' => 'required'
         ]);
+        $categories = DB::table('categories')->where('nom',$request->nom)->get();
+        
+        if(sizeof($categories)>0)
+        {
+            return back()->withErrors([
+                'error' => 'Une catégorie contenant le meme nom existe déja',
+            ]);
+        }
         $updateCategorie = Categorie::find($request->route('id'));
         $updateCategorie->nom = $request->nom;
         $updateCategorie->save();
 
+
+        return redirect('/categories');
+    }
+
+    public function deleteCategorie(Request $request)
+    {
+        $categorieToDelete = Categorie::find($request->route('id'));
+        $categorieToDelete->delete();
 
         return redirect('/categories');
     }

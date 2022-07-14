@@ -22,7 +22,7 @@
                                 <a href="/modifierCategorie/{{$categorie->id}}">Modifier</a>
                             </td>
                             <td> 
-                            <a style="color: red" href="/modifierCategorie/{{$categorie->id}}">Supprimer</a>
+                            <a style="color: red" href="/deleteCategorie/{{$categorie->id}}">Supprimer</a>
                             </td>
                             <!-- <td>
                                 <form action="" method="get">

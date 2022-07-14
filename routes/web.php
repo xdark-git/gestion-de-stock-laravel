@@ -41,6 +41,8 @@ Route::get('/modifierCategorie/{id}', [CategoriesController::class, 'updatePage'
 Route::post('/modifierCategorie/{id}', [CategoriesController::class, 'updateCategorie'])  
     ->name('modifierCategorie')
     ->middleware('auth');
+Route::get('/deleteCategorie/{id}', [CategoriesController::class, 'deleteCategorie'])  
+    ->middleware('auth');
 
 Route::get('/produit', [ProduitController::class, 'liste'])  
     ->name('produit')
