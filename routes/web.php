@@ -65,6 +65,8 @@ Route::post('/ajouterEntree', [EntreesController::class, 'ajouter'])
     ->middleware('auth');
 Route::get('/modifierEntree/{id}', [EntreesController::class, 'updatePage']) 
     ->middleware('auth');
+Route::get('/supprimerEntree/{id}', [EntreesController::class, 'deleteEntree']) 
+    ->middleware('auth');
 Route::post('/modifierEntree/{id}', [EntreesController::class, 'updateEntree']) 
     ->middleware('auth');
 

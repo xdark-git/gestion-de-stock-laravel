@@ -187,6 +187,30 @@ class EntreesController extends Controller
 
     public function deleteEntree(Request $request)
     {
-        // 
+        $entreeToDelete = Entree::with('produits')->where('id',$request->route('id'))->get();
+        // echo $entreeToDelete;
+        if(sizeof($entreeToDelete)>0)
+        {
+            $verifyStock = $entreeToDelete[0]->produits->stock - $entreeToDelete[0]->quantite;
+
+            if($verifyStock<0)
+            {
+                return back()->withErrors([
+                    'error' => 'le stock de '.$entreeToDelete[0]->produits->libelle.' est inférieure à la quantité d\'entree '.$entrees[0]->quantite,
+                ]);
+            }
+
+            $produit = Produit::find($entreeToDelete[0]->produits->id);
+            $produit->stock = $verifyStock;
+            $produit->save();
+
+            $entreeDeteled = Entree::find($entreeToDelete[0]->id);
+            $entreeDeteled->delete();
+
+            return redirect('/entrees');
+        }
+        return back()->withErrors([
+            'error' => 'l\'entrée que vous essayez de supprimer n\'existe pas dans la base',
+        ]);
     }
 }
