@@ -27,6 +27,12 @@ class EntreesController extends Controller
      */
     public function ajouter(Request $request)
     {
+        $validated = $request->validate([
+            'quantite' => 'required',
+            'prix' => 'required',
+            'date' => 'required',
+            'produit_id' => 'required',
+        ]);
         
         if(intval($request->quantite) < 0)
         {
@@ -75,18 +81,112 @@ class EntreesController extends Controller
             }
         }
        
+    }
 
-        // $newProduit = new Produit;
+    public function updatePage(Request $request)
+    {
+        $entrees = DB::table('entrees')->where('id',$request->route('id'))->get();
 
-        // $newProduit->libelle = $request->libelle;
-        // $newProduit->stock = $request->stock;
-        // $newProduit->user_id = auth()->user()->id;
+        $produits = DB::table('produits')->get();
+        // echo $entrees;
+
+        return view('entrees.update')
+                ->with('entrees', $entrees)
+                ->with('produits', $produits);
+    }
+
+    public function updateEntree(Request $request)
+    {
+        $validated = $request->validate([
+            'quantite' => 'required',
+            'prix' => 'required',
+            'date' => 'required',
+            'produit' => 'required',
+        ]);
+
+        if(intval($request->quantite) < 0)
+        {
+            return back()->withErrors([
+                'error' => 'la quantité ne peut pas etre une valeur négative',
+            ]);
+        }
+
+        if(intval($request->prix) < 0)
+        {
+            return back()->withErrors([
+                'error' => 'le prix ne peut pas etre une valeur négative',
+            ]);
+        }
+        // checking if the new product selected exist before updating 
+        $produitToUpdate = DB::table('produits')->where('id', $request->produit)->get();
         
-        // $newProduit->categorie_id = $request->categorie_id;
-        // $newProduit->save();
+        if(sizeof($produitToUpdate))
+        {
+            
+            /*
+                if the user try to update an entree where the old product stock is less than
+                actual entree, it will throw an error else it will take back the quantite 
+                in the old product stock and then update the new product selected
+            */
+            $entrees = Entree::with('produits')->where('id',$request->route('id'))->get();
 
-        // return redirect('/produit');
+            $returnBackStock = $entrees[0]->produits->stock - $entrees[0]->quantite;
+            // echo $returnBackStock;
 
+            if($returnBackStock<0){
+                return back()->withErrors([
+                    'error' => 'le stock de '.$entrees[0]->produits->libelle.' est inférieure à la quantité d\'entree '.$entrees[0]->quantite,
+                ]);
+            }
+            
+            $oldProduit= Produit::find($entrees[0]->produits->id);
+
+            if($oldProduit->id == $request->produit)
+            {
+                $oldProduit->stock = $returnBackStock + $request->quantite;
+                $oldProduit->save();
+
+                $entreesToUpdate = Entree::find($request->route('id'));
+                $entreesToUpdate->quantite = $request->quantite;
+                $entreesToUpdate->prix = $request->prix;
+                $entreesToUpdate->date = $request->date;
+                $entreesToUpdate->produit_id = $request->produit;
+                $entreesToUpdate->save();
+
+                return redirect('/entrees');
+            }
+            
+            $oldProduit->stock = $returnBackStock;
+            $oldProduit->save();
+
+            $entreesToUpdate = Entree::find($request->route('id'));
+            $entreesToUpdate->quantite = $request->quantite;
+            $entreesToUpdate->prix = $request->prix;
+            $entreesToUpdate->date = $request->date;
+            $entreesToUpdate->produit_id = $request->produit;
+            $entreesToUpdate->save();
+
+            $newStock = $produitToUpdate[0]->stock + $request->quantite;
+            $produit= Produit::find($request->produit);
+            $produit->stock = $newStock;
+            $produit->save();
+
+            
+            return redirect('/entrees');
+
+            
+        }
+        else{
+            return back()->withErrors([
+                'error' => 'le produit n\'existe pas dans la base',
+            ]);
+        }
         
+        
+    }
+
+    public function deleteEntree(Request $request)
+    {
+        // 
     }
 }

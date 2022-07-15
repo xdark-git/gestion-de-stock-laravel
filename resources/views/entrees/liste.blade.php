@@ -15,6 +15,8 @@
                             <th>Quantite</th>
                             <th>prix</th>
                             <th>Date</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                         @foreach($entrees as $entree)
                             <tr>
@@ -22,6 +24,12 @@
                                 <td>{{$entree->quantite}}</td>
                                 <td>{{$entree->prix}}</td>
                                 <td>{{$entree->date}}</td>
+                                <td> 
+                                    <a href="/modifierEntree/{{$entree->id}}">Modifier</a>
+                                </td>
+                                <td> 
+                                    <a style="color: red" href="/supprimerEntree/{{$entree->id}}">Supprimer</a>
+                                </td>
                             </tr>
                         @endforeach
                         

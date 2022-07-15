@@ -63,6 +63,10 @@ Route::get('/entrees', [EntreesController::class, 'liste'])
 Route::post('/ajouterEntree', [EntreesController::class, 'ajouter'])  
     ->name('ajouterEntree')
     ->middleware('auth');
+Route::get('/modifierEntree/{id}', [EntreesController::class, 'updatePage']) 
+    ->middleware('auth');
+Route::post('/modifierEntree/{id}', [EntreesController::class, 'updateEntree']) 
+    ->middleware('auth');
 
 
 
