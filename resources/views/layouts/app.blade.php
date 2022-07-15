@@ -64,7 +64,7 @@
                         <a class="collapse-item" href="{{route('categories')}}">Gestion des categories</a>
                         <a class="collapse-item" href="{{route('produit')}}">Gestion des produits</a>
                         <a class="collapse-item" href="{{route('entrees')}}">Gestion des entrées</a>
-                        <a class="collapse-item" href="#">Gestiond des sorties</a>
+                        <a class="collapse-item" href="{{route('sorties')}}">Gestion des sorties</a>
                     </div>
                 </div>
             </li>

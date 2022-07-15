@@ -93,12 +93,12 @@ class ProduitController extends Controller
         ]);
         $produits = DB::table('produits')->where('libelle',$request->libelle)->get();
         
-        if(sizeof($produits)>0 && $produits[0]->categorie_id == $request->categorie_id)
-        {
-            return back()->withErrors([
-                'error' => 'il existe déjà un produit du meme nom et de la meme catégorie',
-            ]);
-        }
+        // if(sizeof($produits)>0 && $produits[0]->categorie_id == $request->categorie_id)
+        // {
+        //     return back()->withErrors([
+        //         'error' => 'il existe déjà un produit du meme nom et de la meme catégorie',
+        //     ]);
+        // }
         $updateProduit = Produit::find($request->route('id'));
         $updateProduit->libelle = $request->libelle;
         $updateProduit->stock = $request->stock;

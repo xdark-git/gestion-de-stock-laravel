@@ -6,6 +6,7 @@ use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\EntreesController;
+use App\Http\Controllers\SortiesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +71,18 @@ Route::get('/supprimerEntree/{id}', [EntreesController::class, 'deleteEntree'])
 Route::post('/modifierEntree/{id}', [EntreesController::class, 'updateEntree']) 
     ->middleware('auth');
 
+Route::get('/sorties', [SortiesController::class, 'liste'])  
+    ->name('sorties')
+    ->middleware('auth');
+Route::post('/ajouterSortie', [SortiesController::class, 'ajouter'])  
+    ->name('ajouterSortie')
+    ->middleware('auth');
+Route::get('/modifierSortie/{id}', [SortiesController::class, 'updatePage'])
+    ->middleware('auth');
+Route::post('/modifierSortie/{id}', [SortiesController::class, 'updateSortie'])
+    ->middleware('auth');
+Route::get('/supprimerSortie/{id}', [SortiesController::class, 'deleteSortie']) 
+    ->middleware('auth');
 
 
 
