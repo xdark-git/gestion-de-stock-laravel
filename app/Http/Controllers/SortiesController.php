@@ -188,6 +188,29 @@ class SortiesController extends Controller
 
     public function deleteSortie(Request $request)
     {
+        /*
+            we are going to verify if the sortie exist first 
+            and if it does we return the stock and after delete
+            the sortie
+         */
+        $sorties = Sortie::with('produits')->where('id', $request->route('id'))->get();
+        
+        if(sizeof($sorties))
+        {
+            $stock = $sorties[0]->produits->stock + $sorties[0]->quantite;
+            $produit = Produit::find($sorties[0]->produits->id);
+            $produit->stock = $stock;
+            $produit->save();
+            $sortieDeleted = Sortie::find($sorties[0]->id);
+            $sortieDeleted->delete();
 
+            return redirect('/sorties');
+        }
+        else
+        {
+            return back()->withErrors([
+                'error' => 'la sortie n\'existe pas dans la base',
+            ]);
+        }
     }
 }
