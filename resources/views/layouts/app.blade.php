@@ -61,9 +61,10 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gestion des pages</h6>
-                        <a class="collapse-item" href="#">Gestion des produits</a>
-                        <a class="collapse-item" href="#">Gestion des entrées</a>
-                        <a class="collapse-item" href="#">Gestiond des sorties</a>
+                        <a class="collapse-item" href="{{route('categories')}}">Gestion des categories</a>
+                        <a class="collapse-item" href="{{route('produit')}}">Gestion des produits</a>
+                        <a class="collapse-item" href="{{route('entrees')}}">Gestion des entrées</a>
+                        <a class="collapse-item" href="{{route('sorties')}}">Gestion des sorties</a>
                     </div>
                 </div>
             </li>
@@ -145,7 +146,7 @@
                 
                 <div class="container-fluid">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800"></h1>
                     </div>
                     @yield('content')
                 </div>
