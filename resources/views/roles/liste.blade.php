@@ -10,8 +10,8 @@
                 <div class="card-body">
                     <table class="table table-striped">
                         <tr>
-                            <th>libelle</th>
-                            <th>Quantite en stock</th>
+                            <th>Nom</th>
+                            <th>Role</th>
                             <th></th>
                             <th></th>
                         </tr>

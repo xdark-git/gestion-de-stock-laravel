@@ -65,6 +65,7 @@
                         <a class="collapse-item" href="{{route('produit')}}">Gestion des produits</a>
                         <a class="collapse-item" href="{{route('entrees')}}">Gestion des entrées</a>
                         <a class="collapse-item" href="{{route('sorties')}}">Gestion des sorties</a>
+                        <a class="collapse-item" href="{{route('users')}}">Gestion des utilisateurs</a>
                     </div>
                 </div>
             </li>

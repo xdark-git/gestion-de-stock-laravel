@@ -7,6 +7,7 @@ use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\EntreesController;
 use App\Http\Controllers\SortiesController;
+use App\Http\Controllers\RolesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,5 +85,6 @@ Route::post('/modifierSortie/{id}', [SortiesController::class, 'updateSortie'])
 Route::get('/supprimerSortie/{id}', [SortiesController::class, 'deleteSortie']) 
     ->middleware('auth');
 
-
-
+Route::get('/users', [RolesController::class, 'liste'])  
+    ->name('users')
+    ->middleware('auth');
