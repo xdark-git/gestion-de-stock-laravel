@@ -11,19 +11,32 @@
                     <table class="table table-striped">
                         <tr>
                             <th>Nom</th>
-                            <th>Role</th>
+                            <th>Email</th>
+                            <th>Roles</th>
                             <th></th>
                             <th></th>
                         </tr>
-                        @foreach($produits as $produit)
+                        @foreach($users as $user)
                             <tr>
-                                <td>{{$produit->libelle}}</td>
-                                <td>{{$produit->stock}}</td>
-                                <td> 
-                                    <a href="/modifierProduit/{{$produit->id}}">Modifier</a>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->email}}</td>
+                                <td>
+                                    @if(sizeof($user->roles) == 0)
+                                    -
+                                    @endif
+                                    @if(sizeof($user->roles) == 1)
+                                    {{$user->roles[0]->name}}
+                                    @endif
+                                    @if(sizeof($user->roles) > 1)
+                                    <a href="/listeRoles/{{$user->id}}">liste des roles</a>
+                                    @endif
+
                                 </td>
                                 <td> 
-                                    <a style="color: red" href="/supprimerProduit/{{$produit->id}}">Supprimer</a>
+                                    <a href="/modifierUtilisateur/{{$user->id}}">Modifier</a>
+                                </td>
+                                <td> 
+                                    <a style="color: red" href="/supprimerUtilisateur/{{$user->id}}">Supprimer</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -36,7 +49,7 @@
             <div class="card ">
                 <div class="card-header">Formulaire de gestion des produits</div>
                 <div class="card-body">
-                <form action="{{route('ajouterProduit')}}" method="post" >
+                <form action="#" method="post" >
                     @csrf
                     @if($errors->any())
 						<div class="alert alert-danger">
@@ -50,9 +63,9 @@
                     <input type="text" name="libelle" placeholder="Libelle" class="form-control form-group">
                     <input type="text" name="stock" placeholder="Quantité stock" class="form-control form-group">
                     <select class="form-control form-group" aria-label=".form-select-lg example"  name ="categorie_id">
-                        <option selected>Selectionner la catégorie du produit</option>
-                        @foreach($categories as $categorie)
-                            <option value="{{$categorie->id}}">{{$categorie->nom}}</option>
+                        <option selected>Selectionner le role de l'utilisateur </option>
+                        @foreach($roles as $role)
+                            <option value="{{$role->id}}">{{$role->name}}</option>
                         @endforeach
                     </select>
                     <input type="submit" value="Ajouter" class="btn btn-success form-group">

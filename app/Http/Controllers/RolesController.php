@@ -11,7 +11,11 @@ class RolesController extends Controller
 {
     public function liste()
     {
-        $users = User::with(['users', 'roles'])->get();
-        echo $users;
+        $users = User::with('roles')->get();
+        $roles = DB::table('roles')->get();
+
+        return view('roles.liste')
+            ->with('users', $users)
+            ->with('roles', $roles);
     }
 }
