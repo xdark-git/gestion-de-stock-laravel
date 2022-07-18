@@ -6,7 +6,7 @@
 <div class="row">
         <div class="container col-md-6">
             <div class="card ">
-                <div class="card-header">Liste des produits</div>
+                <div class="card-header">Liste des utilisateurs</div>
                 <div class="card-body">
                     <table class="table table-striped">
                         <tr>
@@ -47,9 +47,9 @@
         </div>
         <div class="container col-md-6">
             <div class="card ">
-                <div class="card-header">Formulaire de gestion des produits</div>
+                <div class="card-header">Formulaire d'enregistrement de nouvels utilisateurs</div>
                 <div class="card-body">
-                <form action="#" method="post" >
+                <form action="{{route('nouvelUtilisateur')}}" method="post" >
                     @csrf
                     @if($errors->any())
 						<div class="alert alert-danger">
@@ -60,14 +60,14 @@
                             </ul>
 						</div>
 					@endif
-                    <input type="text" name="libelle" placeholder="Libelle" class="form-control form-group">
-                    <input type="text" name="stock" placeholder="Quantité stock" class="form-control form-group">
-                    <select class="form-control form-group" aria-label=".form-select-lg example"  name ="categorie_id">
-                        <option selected>Selectionner le role de l'utilisateur </option>
-                        @foreach($roles as $role)
-                            <option value="{{$role->id}}">{{$role->name}}</option>
-                        @endforeach
-                    </select>
+                    <input type="text" name="name" placeholder="nom" class="form-control form-group">
+                    <input type="text" name="email" placeholder="email" class="form-control form-group">
+                    @foreach($roles as $role)
+                        <div class="d-inline">
+                            <input type="checkbox" value="{{$role->id}}" name="{{$role->id}}"> {{$role->name}}
+                        </div>
+                    @endforeach
+                    </br></br>
                     <input type="submit" value="Ajouter" class="btn btn-success form-group">
                 </form>
                 </div>

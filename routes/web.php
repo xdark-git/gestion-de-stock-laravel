@@ -88,3 +88,6 @@ Route::get('/supprimerSortie/{id}', [SortiesController::class, 'deleteSortie'])
 Route::get('/users', [RolesController::class, 'liste'])  
     ->name('users')
     ->middleware('auth');
+Route::post('/nouvelUtilisateur', [RolesController::class, 'ajouter'])  
+    ->name('nouvelUtilisateur')
+    ->middleware('auth');
